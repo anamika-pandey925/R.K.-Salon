@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/* ===== Custom Theme ===== */
+@theme {
+  --color-gold: #D4AF37;
+  --color-gold-light: #E8D48B;
+  --color-gold-dark: #B8960C;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-light: #2d2d2d;
+  --color-nude: #E8D5C4;
+  --color-nude-light: #F5EDE6;
+  --color-cream: #FAF7F2;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+  }
+
+  body {
+    @apply bg-white text-charcoal antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-charcoal;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-cream;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold/60 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold;
+  }
+}
+
+/* ===== Utility Classes ===== */
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-gold-dark via-gold to-gold-light bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+/* ===== Animations ===== */
+@layer base {
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
+  }
+
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-gold {
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+}
+
+/* ===== Loader ===== */
+.loader-container {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-charcoal;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-container.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-logo {
+  @apply text-gold text-4xl font-bold;
+  font-family: var(--font-heading);
+  animation: float 2s ease-in-out infinite;
+}
+
+/* ===== Premium Button Styles ===== */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gold text-charcoal font-semibold rounded-full
+         transition-all duration-300 ease-out
+         hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25 hover:-translate-y-0.5
+         active:translate-y-0 active:shadow-md
+         focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-charcoal;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-gold text-gold font-semibold rounded-full
+         transition-all duration-300 ease-out
+         hover:bg-gold hover:text-charcoal hover:shadow-lg hover:shadow-gold/25 hover:-translate-y-0.5
+         active:translate-y-0 active:shadow-md
+         focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2;
+}
+
+.btn-white {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-charcoal font-semibold rounded-full
+         transition-all duration-300 ease-out
+         hover:bg-cream hover:shadow-lg hover:-translate-y-0.5
+         active:translate-y-0 active:shadow-md;
+}
